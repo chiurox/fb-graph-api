@@ -1,0 +1,47 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+html {
+    font-family : "Myriad Web",Verdana,Helvetica,Arial,sans-serif;
+}
+div {
+    margin: 20px;
+}
+
+label, input {
+    font-size : 77%;
+    display: inline-block;
+    vertical-align: baseline;
+    width: 125px;
+}
+
+form, input {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+form {
+    width: 300px;
+}
+
+table, tr, td {
+    font-size : 45%;
+    background : #efe none; color : #630;
+    margin:12px;
+    border-width: 1px;
+    border-style: ridge;
+
+}

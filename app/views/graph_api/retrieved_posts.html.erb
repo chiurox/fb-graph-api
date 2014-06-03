@@ -1,0 +1,34 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<%= javascript_tag do %>
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var js_category_data = <%= raw @ruby_category_data.to_a.unshift(['Category', 'Count']) %>;
+        var data = google.visualization.arrayToDataTable(js_category_data);
+        var options = {
+            title: 'Posts Breakdown by Category',
+            is3D: true,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+    }
+<% end %>
+<div>
+  Showing <%= pluralize(@posts.length, "Facebook post") %> containing the search phrase: <strong>"<%= URI.decode(@search_phrase) %>"</strong>
+</div>
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+<div>
+    <% @posts.each do |fb_post| %>
+        <table>
+            <tr><td>PostID</td><td><%= fb_post["id"] %></td></tr>
+            <tr><td>From</td><td><%= fb_post["from"]["name"] %></td></tr>
+            <tr><td>Category</td><td><%= fb_post["from"]["category"] if fb_post.has_key? "from" %></td></tr>
+            <tr><td>Created Time</td><td><%= fb_post["created_time"] %> (<%= time_ago_in_words(Date.parse(fb_post["created_time"])) %> ago)</td></tr>
+            <tr><td>Message</td><td><%= fb_post["message"] %></td></tr>
+            <tr><td>Link</td><td><a href="<%= fb_post["link"] %>"><%= fb_post["link"] %></a></td></tr>
+          <tr><td># of Shares</td><td><%= fb_post["shares"]["count"] if fb_post.has_key? "shares" %></td></tr>
+            <tr><td># of Likes</td><td><%= fb_post["likes"]["data"].count if fb_post.has_key? "likes" %></td></tr>
+            <tr></tr>
+        </table>
+    <% end %>
+</div>

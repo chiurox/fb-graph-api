@@ -1,0 +1,35 @@
+<div id="login">
+    <p>First, please login via Facebook to obtain the Access Token:</p>
+    <button class="btn btn-success" id="fb-login">Login</button>
+</div>
+<%= javascript_tag do %>
+    document.getElementById('fb-login').onclick = function() {
+        var cb = function(response) {
+            if (response.status === 'connected') {
+                console.log('User logged in');
+                $('div#login').fadeOut();
+                $('div#inputForm').fadeIn();
+            } else {
+                console.log('User is logged out');
+            }
+        };
+        FB.login(cb, { scope: 'read_stream' });
+    };
+<% end %>
+
+<div id="inputForm" style="display:none;">
+    <p>
+      Now, you can search Facebook posts by specifying the following:
+    </p>
+    <form method="POST" action="/retrieve-posts">
+      <label>Word or phrase:</label>
+      <input type="text" name="phrase" placeholder="ex.: Apple" maxlength="100" value="Apple">
+      <label>Start (mm/dd/yyyy):</label>
+      <input type="text" name="start_date" maxlength="12" value="05/26/2014">
+      <label>End (mm/dd/yyyy):</label>
+      <input type="text" name="end_date" value="06/10/2014" maxlength="12">
+      <label>Limit:</label>
+      <input type="text" name="limit" value="20" maxlength="3">
+      <input type="submit" value="View">
+    </form>
+</div>
