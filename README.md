@@ -9,7 +9,8 @@ Basic steps to clone and get it up an running locally:
     $ bundle install
 
 This app uses Facebook Javascript SDK to get an Access Token. First, you need to add an entry to
-the /etc/hosts in order to work with Facebook' OAuth.
+the /etc/hosts in order to work with Facebook OAuth.
+
     $ sudo vi /etc/hosts
     $ Password: [your password]
 
